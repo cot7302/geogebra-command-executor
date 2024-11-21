@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>GeoGebra Command Executor</title>
+    <script src="https://cdn.geogebra.org/apps/deployggb.js"></script>
+</head>
+<body>
+
+<h1>GeoGebra 命令执行器</h1>
+
+<!-- GeoGebra嵌入容器 -->
+<div id="ggb-element"></div>
+
+<!-- 文件输入 -->
+<p>
+    <input type="file" id="file-input" accept=".txt">
+    <button id="execute-button">执行命令</button>
+</p>
+
+<script>
+    // 初始化GeoGebra应用
+    var params = {
+        "id": "ggbApplet",
+        "width": 800,
+        "height": 600,
+        "showToolBar": true,
+        "showAlgebraInput": true,
+        "showMenuBar": true,
+        "inputBar": true
+    };
+
+    var applet = new GGBApplet(params, true);
+    window.addEventListener("load", function() {
+        applet.inject('ggb-element');
+    });
+
+    // 处理文件输入和命令执行
+    document.getElementById('execute-button').addEventListener('click', function() {
+        var fileInput = document.getElementById('file-input');
+        if (fileInput.files.length === 0) {
+            alert('请先选择 result_commands.txt 文件');
+            return;
+        }
+
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            var content = e.target.result;
+
+            // 去除首尾的引号并替换转义字符
+            content = content.trim();
+
+
+            // 解析 JSON 格式的字符串
+            try {
+                // 将内容解析为 JSON 数组
+                var commands = JSON.parse('[' + content + ']');
+
+                // 执行命令
+                commands.forEach(function(cmd) {
+                    cmd = cmd.trim();
+                    if (cmd.length > 0) {
+                        ggbApplet.evalCommand(cmd);
+                    }
+                });
+            } catch (err) {
+                alert('解析命令时出错，请检查文件格式。\n错误信息:' + err.message);
+            }
+        };
+
+        reader.readAsText(file, 'UTF-8');
+    });
+
+</script>
+
+</body>
+</html>
