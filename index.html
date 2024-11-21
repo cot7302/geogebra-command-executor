@@ -45,18 +45,15 @@
         var reader = new FileReader();
 
         reader.onload = function(e) {
-            var content = e.target.result;
+            var content = e.target.result.trim().split('\n');
 
             console.log(content);
 
-            const contents = content.split('\n');
-
             try {
-                for (const cont in contents) {
-                    const cmd = cont.trim();
-                    console.log(cmd);
-                    ggbApplet.evalCommand(cmd);
-                }
+                content.forEach(cont => {
+                    console.log(cont);
+                    ggbApplet.evalCommand(cont.trim());
+                });
             } catch (err) {
                 alert('catched error when parsing, \nerror message:' + err.message);
             }
