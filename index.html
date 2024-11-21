@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>GeoGebra Command Executor</title>
@@ -9,25 +9,23 @@
 
 <h1>GeoGebra Command Executor</h1>
 
-<!-- GeoGebra嵌入容器 -->
 <div id="ggb-element"></div>
 
-<!-- 文件输入 -->
+<!-- file input -->
 <p>
     <input type="file" id="file-input" accept=".txt">
     <button id="execute-button">run</button>
 </p>
 
 <script>
-    // 初始化GeoGebra应用
+    // initialize geogebra
     var params = {
         "id": "ggbApplet",
         "width": 800,
         "height": 600,
         "showToolBar": true,
         "showAlgebraInput": true,
-        "showMenuBar": true,
-        "inputBar": true
+        "showMenuBar": true
     };
 
     var applet = new GGBApplet(params, true);
