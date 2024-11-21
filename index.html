@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h1>GeoGebra 命令执行器</h1>
+<h1>GeoGebra Command Executor</h1>
 
 <!-- GeoGebra嵌入容器 -->
 <div id="ggb-element"></div>
@@ -15,7 +15,7 @@
 <!-- 文件输入 -->
 <p>
     <input type="file" id="file-input" accept=".txt">
-    <button id="execute-button">执行命令</button>
+    <button id="execute-button">run</button>
 </p>
 
 <script>
@@ -39,7 +39,7 @@
     document.getElementById('execute-button').addEventListener('click', function() {
         var fileInput = document.getElementById('file-input');
         if (fileInput.files.length === 0) {
-            alert('请先选择 result_commands.txt 文件');
+            alert('please choose file first');
             return;
         }
 
@@ -66,7 +66,7 @@
                     }
                 });
             } catch (err) {
-                alert('解析命令时出错，请检查文件格式。\n错误信息:' + err.message);
+                alert('catched error when parsing, \nerror message:' + err.message);
             }
         };
 
