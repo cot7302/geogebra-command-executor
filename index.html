@@ -50,21 +50,15 @@
             console.log(content);
 
             // 去除首尾的引号并替换转义字符
-            content = content.trim();
+            const contents = content.split('\n');
 
-
-            // 解析 JSON 格式的字符串
             try {
-                // 将内容解析为 JSON 数组
-                var commands = JSON.parse('[' + content + ']');
-
-                // 执行命令
-                commands.forEach(function(cmd) {
-                    cmd = cmd.trim();
-                    if (cmd.length > 0) {
-                        ggbApplet.evalCommand(cmd);
+                for (const cont in contents) {
+                    const cmd = cont.trim();
+                    if (cmd.length() > 0) {
+                        ggdApplet.evalCommand(cmd);
                     }
-                });
+                }
             } catch (err) {
                 alert('catched error when parsing, \nerror message:' + err.message);
             }
