@@ -54,6 +54,7 @@
             try {
                 for (const cont in contents) {
                     const cmd = cont.trim();
+                    console.log(cmd);
                     ggbApplet.evalCommand(cmd);
                 }
             } catch (err) {
