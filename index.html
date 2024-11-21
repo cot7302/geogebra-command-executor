@@ -49,15 +49,12 @@
 
             console.log(content);
 
-            // 去除首尾的引号并替换转义字符
             const contents = content.split('\n');
 
             try {
                 for (const cont in contents) {
                     const cmd = cont.trim();
-                    if (cmd.length() > 0) {
-                        ggdApplet.evalCommand(cmd);
-                    }
+                    ggdApplet.evalCommand(cmd);
                 }
             } catch (err) {
                 alert('catched error when parsing, \nerror message:' + err.message);
